@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   
-   <link href="https://fonts.googleapis.com/css2?family=Scheherazade:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade:wght@700&display=swap" rel="stylesheet">
+
 
   
   <style>
@@ -346,24 +347,29 @@ button:hover,
 
     
 .fancy-letter {
-    font-family: 'Scheherazade', serif; /* خط عربي زخرفي شيك */
-    font-weight: bold;
-    font-size: 4em;                     /* أكبر من باقي النص */
-    color: #1a73e8;                     /* لون جذاب */
-    display: inline-block;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* ظل ناعم لإبراز الحرف */
-    transform: rotate(-2deg);           /* ميل بسيط لإحساس فني */
-  }
+      font-family: 'Scheherazade', serif;
+      font-weight: bold;
+      font-size: 5em;                       /* كبير جدًا */
+      color: #1a73e8;
+      display: inline-block;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+      transform: rotate(-3deg);
+      transition: transform 0.3s, color 0.3s;
+      cursor: default;
+    }
 
-  h1 {
-    font-family: 'Arial', sans-serif;  /* باقي النص */
-    font-size: 2em;
-    display: inline-block;
-  }
-  h1 {
-    font-family: 'Arial', sans-serif; /* خط باقي الكلمة */
-    font-size: 2em;
-  }
+    /* تأثير عند المرور بالماوس */
+    .fancy-letter:hover {
+      color: #ff5722;
+      transform: rotate(0deg) scale(1.2);
+    }
+
+    h1 {
+      font-size: 2.2em;
+      display: inline-block;
+      margin: 0;
+      vertical-align: middle;
+    }
 
 
   </style>
@@ -846,6 +852,7 @@ function closeModal() {
   </div>
 </body>
 </html>
+
 
 
 
