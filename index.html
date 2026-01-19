@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ibraheem Elsayed — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #181a2e;
+      --bg2: #0f1122;
+      --card: rgba(255,255,255,0.08);
+      --muted: #c7cedb;
+      --accent: #5c6cff;
+      --accent2: #bb4bff;
+      --glass: rgba(255,255,255,0.12);
+      --radius: 16px;
+      --max-w: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter', system-ui;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color:#eef3ff;
+      padding:40px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{ max-width:var(--max-w); width:100%; }
+
+    header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .brand{ display:flex; align-items:center; gap:14px; }
+    .logo{ width:56px; height:56px; border-radius:16px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; color:white; box-shadow:0 8px 22px rgba(92,108,255,0.5); }
+    nav a { color: var(--muted); margin-left: 18px; text-decoration: none; font-weight: 600; position: relative; transition: color 0.25s ease, transform 0.25s ease;}
+    nav a:hover { color: var(--accent); transform: translateY(-2px);}
+    nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.3s ease;}
+    nav a:hover::after { width: 100%;}
+
+    .hero{ background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)); border-radius: var(--radius); padding:32px; display:flex; gap:30px; align-items:center; justify-content:space-between; margin-bottom:32px; backdrop-filter:blur(12px); box-shadow:0 12px 40px rgba(0,0,0,0.55); }
+    h1{ margin:0; font-size:32px; font-weight:800; }
+    h1 span{ color:var(--accent); }
+    .lead{ color:var(--muted); margin:14px 0 18px; }
+    .cta{ display:flex; gap:12px; }
+    .btn{ padding:11px 18px; border-radius:12px; font-weight:700; border:0; cursor:pointer; text-decoration:none; display:inline-block; }
+    .btn-primary{ background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white; box-shadow:0 6px 20px rgba(92,108,255,0.4); }
+    .btn-ghost{ background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--muted); }
+    .profile{ width:150px; height:150px; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); backdrop-filter:blur(10px); }
+    .profile img{ width:100%; height:100%; object-fit:cover; }
+
+    #portfolio, #notebooks { margin-bottom: 36px; }
+    #portfolio h2, #notebooks h2 { font-size: 24px; margin-bottom: 16px; }
+    #portfolio .grid, #notebooks .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 400px) { #portfolio .grid, #notebooks .grid { grid-template-columns: 1fr; gap: 12px; }}
+
+    .project-card{ background:rgba(255,255,255,0.06); backdrop-filter:blur(10px); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 12px 30px rgba(0,0,0,0.45); display:flex; flex-direction:column; gap:12px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .project-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 30px rgba(92,108,255,0.35); }
+    .thumb{ height:150px; border-radius:10px; overflow:hidden; background:rgba(255,255,255,0.05); display:block; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .thumb:hover{ transform: translateY(-2px) scale(1.02); }
+    .thumb img{ width:100%; height:100%; object-fit:contain; }
+    .project-title{ font-weight:700; margin:0; }
+    .project-desc{ color:var(--muted); margin:0; font-size:14px; }
+    .project-links{ margin-top:auto; display:flex; gap:8px; }
+    .chip{ padding:6px 12px; border-radius: 999px; font-weight: 600; font-size: 13px; color: #fff; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.09); transition: all 0.25s ease; cursor:pointer; }
+    .chip.redbubble:hover{ background: #00e5ff; box-shadow: 0 6px 18px rgba(0, 229, 255, 0.7); transform: translateY(-2px) scale(1.06); }
+    .chip.kdp:hover{ background: #00c853; box-shadow: 0 6px 18px rgba(0,200,83,0.6); transform: translateY(-2px) scale(1.06); }
+    .chip.preview:hover{ background: #2979ff; box-shadow: 0 6px 18px rgba(41,121,255,0.6); transform: translateY(-2px) scale(1.06); }
+
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; z-index: 1000; overflow-y: auto; padding: 20px 10px; }
+    .modal.active { display: block; }
+    .modal-box { background: #111827; padding: 24px; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-sizing: border-box; max-height: 80vh; overflow-y: auto; }
+
+    .countries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .country { padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.06); text-align: center; cursor: pointer; font-weight: 600; border: 1px solid rgba(255,255,255,0.08); }
+    .country:hover { background: rgba(255,255,255,0.15); }
+    .close { margin-top: 16px; text-align: center; cursor: pointer; color: #9ca3af; font-size: 14px; }
+
+    section h2{ font-size:24px; font-weight:800; }
+    footer{ margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); color:var(--muted); display:flex; justify-content:space-between; font-size:14px; }
+
+    @media(max-width:980px){ .grid{ grid-template-columns:repeat(2,1fr); } .hero{ flex-direction:column; align-items:flex-start; } .profile{ width:120px;height:120px; }}
+    @media(max-width:640px){ .grid{ grid-template-columns:1fr; } header{ flex-direction:column; align-items:flex-start; gap:10px; } nav{ margin-top:8px; } body{ padding:20px; }}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <div class="logo">IE</div>
+    <div>
+      <div style="font-weight:800;font-size:18px;">Ibraheem Elsayed</div>
+      <div style="font-size:13px;color:var(--muted)">Designer • Merch creator • Product mockups</div>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Hello — I’m <span>Ibraheem Elsayed</span></h1>
+    <p class="lead">I design merchandise and product mockups for print-on-demand platforms. I’m preparing designs to join Amazon Merch and sell high-quality notebooks, apparel, and more.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#portfolio">See my work</a>
+      <a class="btn btn-ghost" href="#contact">Contact me</a>
+    </div>
+  </div>
+  <div class="profile">
+    <img src="https://media.licdn.com/dms/image/v2/C4E03AQEeMddDhlBxEQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1517356000462?e=2147483647&v=beta&t=brg09plQ4MiUZ8_lg6rpTHJX-OAVq9aLrJTZG_09Umk" alt="ibraheem elsayed">
+  </div>
+</section>
+
+<section id="portfolio">
+  <h2>T-Shirts</h2>
+  <div class="grid">
+    <!-- كل T-shirts من الكود الأصلي هنا مع lazy loading -->
+    <article class="project-card">
+      <a class="thumb" href="https://www.redbubble.com/shop/ap/176594109" target="_blank"><img src="https://ih1.redbubble.net/image.6018078689.4109/ssrco,oversized_sweatshirt,mens_01,e8e6e1:aa8ffd9f0f,front,square_close_portrait,x1000.jpg" alt="Merch design" loading="lazy"></a>
+      <h3 class="project-title">FUNNY CHILDREN</h3>
+      <p class="project-desc">Amazing Tshirt design for children</p>
+      <div class="project-links"><span class="chip redbubble">RedBubble</span><a class="chip preview" href="https://www.redbubble.com/shop/ap/176594109" target="_blank">Preview</a></div>
+    </article>
+    <<article class="project-card"> <a class="thumb" href="https://www.redbubble.com/shop/ap/176594438" target="_blank"> <img src="https://ih1.redbubble.net/image.6018088614.4438/ssrco,oversized_sweatshirt,mens_01,e8e6e1:aa8ffd9f0f,front,square_close_portrait,x1000.jpg" alt="Merch design"> </a> <h3 class="project-title">ECHO</h3> <p class="project-desc">Amazing Tshirt design</p> <div class="project-links"> <span class="chip redbubble">RedBubble</span> <a class="chip preview" href="https://www.redbubble.com/shop/ap/176594438" target="_blank">Preview</a> </div> </article>
+    !-- باقي T-shirts بنفس الطريقة من الكود الأصلي -->
+<article class="project-card"> <a class="thumb" href="https://www.redbubble.com/shop/ap/176594438" target="_blank"> <img src="https://ih1.redbubble.net/image.6018088614.4438/ssrco,oversized_sweatshirt,mens_01,e8e6e1:aa8ffd9f0f,front,square_close_portrait,x1000.jpg" alt="Merch design"> </a> <h3 class="project-title">ECHO</h3> <p class="project-desc">Amazing Tshirt design</p> <div class="project-links"> <span class="chip redbubble">RedBubble</span> <a class="chip preview" href="https://www.redbubble.com/shop/ap/176594438" target="_blank">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" href="https://www.redbubble.com/shop/ap/176594775" target="_blank"> <img src="https://ih1.redbubble.net/image.6018100856.4775/ssrco,pullover_sweatshirt,mens_01,fcfcfa:e7fde99dd4,front,square_close_portrait,x1000.jpg" alt="Merch design"> </a> <h3 class="project-title">INNOVATE</h3> <p class="project-desc">Amazing Tshirt design</p> <div class="project-links"> <span class="chip redbubble">RedBubble</span> <a class="chip preview" href="https://www.redbubble.com/shop/ap/176594775" target="_blank">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" href="https://www.redbubble.com/shop/ap/176592987" target="_blank"> <img src="https://ih1.redbubble.net/image.6018061260.2987/gptr,1400x,front,101010:01c5ca27c6-c,188,133,1000,1000-bg,f8f8f8.jpg" alt="Merch design"> </a> <h3 class="project-title">Tea-Shirt</h3> <p class="project-desc">Amazing Tshirt design</p> <div class="project-links"> <span class="chip redbubble">RedBubble</span> <a class="chip preview" href="https://www.redbubble.com/shop/ap/176592987" target="_blank">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" href="https://www.redbubble.com/shop/ap/176559425" target="_blank"> <img src="https://ih1.redbubble.net/image.6016987471.9425/ssrco,active_tshirt,mens,101010:01c5ca27c6,front,square_three_quarter,1000x1000.jpg" alt="Merch design"> </a> <h3 class="project-title">cat lover</h3> <p class="project-desc">Amazing Tshirt design</p> <div class="project-links"> <span class="chip redbubble">RedBubble</span> <a class="chip preview" href="https://www.redbubble.com/shop/ap/176559425" target="_blank">Preview</a> </div> </article>
+    
+  </div>
+</section>
+
+<section id="notebooks">
+  <h2>NoteBooks</h2>
+  <div class="grid">
+    <!-- كل Notebooks من الكود الأصلي هنا مع lazy loading و modal -->
+    <!-- مثال لنوت بوك واحد -->
+    <article class="project-card">
+      <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8YVF7ZM"><img src="https://m.media-amazon.com/images/I/71qJ-nXn6DL._SL1499_.jpg" alt="NOTEBOOK - PARIS" loading="lazy"></a>
+      <div>
+        <h3 class="project-title">NOTEBOOK - PARIS</h3>
+        <p class="project-desc">Capture your thoughts, ideas, and daily notes in this beautifully designed Paris-themed notebook.<br />Size: 6x9 inches | 120 Pages</p>
+      </div>
+      <div class="project-links"><span class="chip kdp">KDP</span><a class="chip" onclick="openStoreModal(this)" data-asin="B0G8YVF7ZM">Preview</a></div>
+    </article>
+    <!-- باقي notebooks بنفس الطريقة -->
+    <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0GD82Q6DN"> <img src=https://m.media-amazon.com/images/I/51QVcGDnKFL._SL1499_.jpg> </a> <div> <h3 class="project-title">Today's story - Notebook Paterfly</h3> <p class="project-desc"> Softcover Notebook (6x9 inches, 120 Pages) </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0GD82Q6DN">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0GC5H6P1B"> <img src="https://m.media-amazon.com/images/I/51CtCATL6gL._SL1499_.jpg" alt="NOTEBOOK PLANNER - ROSES" > </a> <div> <h3 class="project-title">NOTEBOOK PLANNER - ROSES</h3> <p class="project-desc"> Plan, focus, and achieve your best every day with this elegant rose-themed notebook planner. <br />Size: 6 x 9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0GC5H6P1B"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0GC5NMGPJ"> <img src="https://m.media-amazon.com/images/I/61+FalzJDfL._SL1499_.jpg" alt="PLANNER: Minimal Design — Maximum Productivity"> </a> <div> <h3 class="project-title">PLANNER: Minimal Design — Maximum Productivity</h3> <p class="project-desc"> A minimalist planner designed to help you maximize productivity and organize daily tasks. <br />ASIN: B0GC5NMGPJ </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0GC5NMGPJ"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0GCJB2NKW"> <img src=https://m.media-amazon.com/images/I/71u-DoFPT9L._SL1499_.jpg> </a> <div> <h3 class="project-title">British Culture Notebook</h3> <p class="project-desc"> Stylish 6×9 Journal for Notes, Sketching, and Daily Planning: A Vibrant Notebook Celebrating London, Big Ben, Red Buses, and Iconic UK Landmarks </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0GCJB2NKW">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8Y3B962"> <img src="https://m.media-amazon.com/images/I/41dkd0M-FSL._SY445_SX342_.jpg" alt="NOTEBOOK - MODERN DESIGN" > </a> <div> <h3 class="project-title">NOTEBOOK - MODERN DESIGN</h3> <p class="project-desc"> A modern and stylish notebook ideal for daily notes, ideas, journaling, and creative writing. <br />Size: 6 x 9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0G8Y3B962"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0GCKD8SPG"> <img src=https://m.media-amazon.com/images/I/51H-UdpNX9L._SY445_SX342_.jpg> </a> <div> <h3 class="project-title">NOTEBOOK AMAZING</h3> <p class="project-desc"> A Classic 120-Page Notebook for Daily Writing </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0GCKD8SPG">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8YJ2WNV"> <img src="https://m.media-amazon.com/images/I/61q5BSAgdhL._SL1499_.jpg" alt="NOTEBOOK - MINIMAL DESIGN" > </a> <div> <h3 class="project-title">NOTEBOOK - MINIMAL DESIGN</h3> <p class="project-desc"> A clean and minimalist notebook perfect for notes, ideas, journaling, and everyday writing. <br />Size: 6 x 9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0G8YJ2WNV"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8XQKFPX"> <img src="https://m.media-amazon.com/images/I/61kaljjjXDL._SL1499_.jpg" alt="NOTE BOOK: Modern Note Book"> </a> <div> <h3 class="project-title">NOTE BOOK: Modern Note Book</h3> <p class="project-desc"> Softcover Notebook (6x9 inches, 120 Pages) </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0G8XQKFPX">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8X81Q23"> <img src="https://m.media-amazon.com/images/I/31c2G044MKL._SY445_SX342_.jpg" alt="NOTEBOOK - ABSTRACT DESIGN" > </a> <div> <h3 class="project-title">NOTEBOOK - ABSTRACT DESIGN</h3> <p class="project-desc"> A stylish abstract design notebook, perfect for notes, ideas, journaling, and everyday writing. <br />Size: 6 x 9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0G8X81Q23"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0G8XS1PRM"> <img src="https://m.media-amazon.com/images/I/31CjN8RQRBL._SY445_SX342_.jpg" alt="NOTEBOOK - CLEAN DESIGN" > </a> <div> <h3 class="project-title">NOTEBOOK - CLEAN DESIGN</h3> <p class="project-desc"> A clean and simple notebook ideal for daily notes, ideas, journaling, and creative writing. <br />Size: 6 x 9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0G8XS1PRM"> Preview </a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0FYFFJ61K"> <img src="https://m.media-amazon.com/images/I/61Op1n6PsjL._SY425_.jpg" alt="NOTEBOOK 2026"> </a> <div> <h3 class="project-title">NOTEBOOK 2026</h3> <p class="project-desc"> Journal, Diary & Notebook For the Everyday | Blank Lines | Size: 6x9 inches | 120 Pages </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0FYFFJ61K">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0FYNVGJ31"> <img src="https://m.media-amazon.com/images/I/61bIQ5kl+zL._SY425_.jpg" alt="She Believed She Could So She Did Notebook"> </a> <div> <h3 class="project-title">She Believed She Could So She Did</h3> <p class="project-desc"> Journal, Diary & Notebook for the Everyday Girl Boss (Boss Lady Gifts). Journal gift for loved girls. Blank lined pages, size 6×9 inches, 120 pages. </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0FYNVGJ31">Preview</a> </div> </article> <article class="project-card"> <a class="thumb" onclick="openStoreModal(this)" data-asin="B0FYGTWKPW"> <img src="https://m.media-amazon.com/images/I/41V5dCyc2mL._SY445_SX342_ControlCacheEqualizer_.jpg" alt="She Believed She Could So She Did Notebook 200 Pages"> </a> <div> <h3 class="project-title">she believed she could so she did</h3> <p class="project-desc"> Journal, Diary & Notebook — 6×9 inches, 200 pages. Perfect for girls & boss ladies. </p> </div> <div class="project-links"> <span class="chip">KDP</span> <a class="chip" onclick="openStoreModal(this)" data-asin="B0FYGTWKPW">Preview</a> </div> </article>
+  </div>
+  <div class="modal" id="storeModal">
+    <div class="modal-box">
+      <h3>Choose your store</h3>
+      <div class="countries" id="storeLinks"></div>
+      <div class="close" onclick="closeModal()">Cancel</div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="margin-bottom:20px">
+  <h2>About me</h2>
+  <p style="color:var(--muted);margin:0">I create ready-to-upload merchandise designs and notebook covers optimized for Amazon KDP and Merch on Demand. I focus on print bleed, safe areas, and export settings for professional results.</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="color:var(--muted);margin-top:0">Interested in working together or want the source files? Email me:</p>
+  <a class="btn btn-primary" href="mailto:ibraheem.elsayed@gmail.com?subject=Portfolio%20Inquiry">Email me</a>
+</section>
+
+<footer>
+  <div>© <strong>Ibraheem Elsayed</strong> — merch & print designs</div>
+  <div>Made with ♥ — Ibraheem Elsayed </div>
+</footer>
+
+</div>
+<script>
+const stores = [{ code: "US", flag: "🇺🇸", url: "https://www.amazon.com/dp/" }, { code: "UK", flag: "🇬🇧", url: "https://www.amazon.co.uk/dp/" }, { code: "DE", flag: "🇩🇪", url: "https://www.amazon.de/dp/" }, { code: "FR", flag: "🇫🇷", url: "https://www.amazon.fr/dp/" }, { code: "ES", flag: "🇪🇸", url: "https://www.amazon.es/dp/" }, { code: "IT", flag: "🇮🇹", url: "https://www.amazon.it/dp/" }, { code: "NL", flag: "🇳🇱", url: "https://www.amazon.nl/dp/" }, { code: "PL", flag: "🇵🇱", url: "https://www.amazon.pl/dp/" }, { code: "SE", flag: "🇸🇪", url: "https://www.amazon.se/dp/" }, { code: "IE", flag: "🇮🇪", url: "https://www.amazon.ie/dp/" }, { code: "JP", flag: "🇯🇵", url: "https://www.amazon.co.jp/dp/" }, { code: "CA", flag: "🇨🇦", url: "https://www.amazon.ca/dp/" }, { code: "AU", flag: "🇦🇺", url: "https://www.amazon.com.au/dp/" }];
+function openStoreModal(el){const asin=el.dataset.asin;const container=document.getElementById("storeLinks");container.innerHTML="";stores.forEach(store=>{const div=document.createElement("div");div.className="country";div.textContent=`${store.flag} ${store.code}`;div.onclick=()=>{window.open(store.url+asin,"_blank");closeModal();};container.appendChild(div);});document.getElementById("storeModal").classList.add("active");}
+function closeModal(){document.getElementById("storeModal").classList.remove("active");}
+</script>
+</body>
+</html>
